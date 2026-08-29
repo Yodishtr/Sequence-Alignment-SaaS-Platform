@@ -26,11 +26,15 @@ public class Tenant {
     @Column(name = "quota", nullable = false, updatable = true)
     private Integer quota;
 
-    @OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "alignment")
     private List<AlignmentJob> alignmentJobs = new ArrayList<>();
 
-    public Tenant() {}
+    @OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "api_key")
+    private List<ApiKey> apiKeys = new ArrayList<>();
+
+    protected Tenant() {}
 
     // Getters
     public UUID getId() {
