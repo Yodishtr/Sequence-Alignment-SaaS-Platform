@@ -1,0 +1,20 @@
+"spring.application.name=alignment-service"
+
+"postgresql" connection
+"spring.datasource.driver-class-name=org.postgresql.Driver"
+"spring.datasource.url=jdbc":postgresql://localhost:5432/sequence_alignment_service
+spring.datasource.username=yodishtrvythilingum
+spring.datasource.password=
+
+spring jpa configs
+spring.flyway.enabled=true
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+spring.sql.init.mode=never
+spring.jpa.defer-datasource-initialization=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.open-in-view=false
+
+server port
+server.port=8080

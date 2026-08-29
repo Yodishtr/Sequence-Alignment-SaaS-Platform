@@ -1,0 +1,68 @@
+package entity;
+
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "tenants")
+public class Tenant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(name = "tenant_name", nullable = false, unique = true)
+    private String name;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @Column(name = "quota", nullable = false, updatable = true)
+    private Integer quota;
+
+    @OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY)
+    @Column(name = "alignment")
+    private List<AlignmentJob> alignmentJobs = new ArrayList<>();
+
+    public Tenant() {}
+
+    // Getters
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Integer getQuota() {
+        return quota;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setQuota(Integer quota) {
+        this.quota = quota;
+    }
+}
