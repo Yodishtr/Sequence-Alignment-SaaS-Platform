@@ -6,9 +6,9 @@ import java.util.UUID;
 
 public class ResultSummary {
     // job details
-    private UUID jobId;
-    private AlignmentJob.Tool tool;
-    private ExecutionMetrics executionMetrics;
+//    private UUID jobId;
+//    private AlignmentJob.Tool tool;
+//    private ExecutionMetrics executionMetrics;
     // job params
     private Double eValueCutoff;
     private String scoringMatrix;
@@ -25,17 +25,17 @@ public class ResultSummary {
     public ResultSummary() {}
 
     // Getters
-    public UUID getJobId() {
-        return jobId;
-    }
-
-    public AlignmentJob.Tool getTool() {
-        return tool;
-    }
-
-    public ExecutionMetrics getExecutionMetrics() {
-        return executionMetrics;
-    }
+//    public UUID getJobId() {
+//        return jobId;
+//    }
+//
+//    public AlignmentJob.Tool getTool() {
+//        return tool;
+//    }
+//
+//    public ExecutionMetrics getExecutionMetrics() {
+//        return executionMetrics;
+//    }
 
     public Double geteValueCutoff() {
         return eValueCutoff;
@@ -78,17 +78,17 @@ public class ResultSummary {
     }
 
     // Setters
-    public void setJobId(UUID jobId) {
-        this.jobId = jobId;
-    }
-
-    public void setTool(AlignmentJob.Tool tool) {
-        this.tool = tool;
-    }
-
-    public void setExecutionMetrics(ExecutionMetrics executionMetrics) {
-        this.executionMetrics = executionMetrics;
-    }
+//    public void setJobId(UUID jobId) {
+//        this.jobId = jobId;
+//    }
+//
+//    public void setTool(AlignmentJob.Tool tool) {
+//        this.tool = tool;
+//    }
+//
+//    public void setExecutionMetrics(ExecutionMetrics executionMetrics) {
+//        this.executionMetrics = executionMetrics;
+//    }
 
     public void seteValueCutoff(Double eValueCutoff) {
         this.eValueCutoff = eValueCutoff;

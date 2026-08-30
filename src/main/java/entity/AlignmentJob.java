@@ -47,7 +47,7 @@ public class AlignmentJob {
         }
 
         public static JobStatus getJobStatus(String value) {
-            if (value.isBlank() || value == null) {
+            if (value == null || value.isBlank()) {
                 return JobStatus.UNKNOWN;
             }
             String sanitizedValue = value.trim().toLowerCase();
@@ -78,7 +78,7 @@ public class AlignmentJob {
         }
 
         public static Tool getToolFromString(String value) {
-            if (value.isBlank() || value == null) {
+            if (value == null || value.isBlank()) {
                 return Tool.UNKNOWN;
             }
             String sanitizedValue = value.trim().toLowerCase();
@@ -91,7 +91,7 @@ public class AlignmentJob {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tenant_id")
+    @JoinColumn(name = "tenant_id", nullable = false)
     private Tenant tenant;
 
     @Column(name = "job_status", nullable = false)
@@ -120,7 +120,7 @@ public class AlignmentJob {
     @Column(name = "created_at",nullable = false, updatable = false)
     private Instant createdAt;
 
-    @LastModifiedDate
+
     @Column(name = "completed_at")
     private Instant completedAt;
 

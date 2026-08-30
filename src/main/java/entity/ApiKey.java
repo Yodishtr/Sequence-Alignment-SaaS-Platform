@@ -36,7 +36,7 @@ public class ApiKey {
         }
 
         public static KeyStatus getKeyStatusFromString(String key) {
-            if (key.isBlank() || key == null) {
+            if (key == null || key.isBlank()) {
                 return KeyStatus.UNKNOWN;
             }
             String sanitizedKey = key.trim().toLowerCase();

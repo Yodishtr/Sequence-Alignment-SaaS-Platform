@@ -2,6 +2,9 @@ package entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tenants")
+@EntityListeners(AuditingEntityListener.class)
 public class Tenant {
 
     @Id
@@ -19,19 +23,17 @@ public class Tenant {
     @Column(name = "tenant_name", nullable = false, unique = true)
     private String name;
 
-    @CreationTimestamp
+    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
     @Column(name = "quota", nullable = false, updatable = true)
     private Integer quota;
 
-    @OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "alignment")
+    @OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY)
     private List<AlignmentJob> alignmentJobs = new ArrayList<>();
 
     @OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "api_key")
     private List<ApiKey> apiKeys = new ArrayList<>();
 
     protected Tenant() {}
@@ -68,5 +70,16 @@ public class Tenant {
 
     public void setQuota(Integer quota) {
         this.quota = quota;
+    }
+
+    // JPA helper
+    public void addAlignmentJob(AlignmentJob alignmentJob) {
+        this.alignmentJobs.add(alignmentJob);
+        alignmentJob.setTenant(this);
+    }
+
+    public void addApiKey(ApiKey apiKey) {
+        this.apiKeys.add(apiKey);
+        apiKey.setTenant(this);
     }
 }

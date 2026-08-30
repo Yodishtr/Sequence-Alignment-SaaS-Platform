@@ -14,6 +14,8 @@ public class ExecutionMetrics {
         this.memoryConsumedBytes = memoryConsumedBytes;
     }
 
+    public ExecutionMetrics() {}
+
     // Getters
     public Long getExecutionDurationMs() {
         return executionDurationMs;

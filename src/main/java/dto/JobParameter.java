@@ -13,6 +13,8 @@ public class JobParameter {
         this.gapOpenPenalty = gapOpenPenalty;
     }
 
+    public JobParameter() {}
+
     // Getter
     public Double geteValueCutoff() {
         return eValueCutoff;
