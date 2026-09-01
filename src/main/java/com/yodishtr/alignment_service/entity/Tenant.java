@@ -1,10 +1,8 @@
-package entity;
+package com.yodishtr.alignment_service.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -55,6 +53,14 @@ public class Tenant {
         return quota;
     }
 
+    public List<AlignmentJob> getAlignmentJobs() {
+        return alignmentJobs;
+    }
+
+    public List<ApiKey> getApiKeys() {
+        return apiKeys;
+    }
+
     // Setters
     public void setName(String name) {
         this.name = name;
@@ -71,6 +77,15 @@ public class Tenant {
     public void setQuota(Integer quota) {
         this.quota = quota;
     }
+
+    public void setAlignmentJobs(List<AlignmentJob> alignmentJobs) {
+        this.alignmentJobs = alignmentJobs;
+    }
+
+    public void setApiKeys(List<ApiKey> apiKeys) {
+        this.apiKeys = apiKeys;
+    }
+
 
     // JPA helper
     public void addAlignmentJob(AlignmentJob alignmentJob) {

@@ -1,4 +1,4 @@
-package dto;
+package com.yodishtr.alignment_service.dto;
 
 public class JobParameter {
     /* need to have fields checked in service layer

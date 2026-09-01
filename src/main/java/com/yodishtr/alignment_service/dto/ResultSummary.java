@@ -1,8 +1,4 @@
-package dto;
-
-import entity.AlignmentJob;
-
-import java.util.UUID;
+package com.yodishtr.alignment_service.dto;
 
 public class ResultSummary {
     // job details

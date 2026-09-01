@@ -1,4 +1,4 @@
-package entity;
+package com.yodishtr.alignment_service.entity;
 
 import jakarta.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

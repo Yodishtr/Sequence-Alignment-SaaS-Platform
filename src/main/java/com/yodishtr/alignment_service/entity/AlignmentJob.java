@@ -1,12 +1,11 @@
-package entity;
+package com.yodishtr.alignment_service.entity;
 
-import dto.JobParameter;
-import dto.ResultSummary;
+import com.yodishtr.alignment_service.dto.JobParameter;
+import com.yodishtr.alignment_service.dto.ResultSummary;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
