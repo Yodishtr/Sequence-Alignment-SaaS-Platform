@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
+import java.util.Optional;
 
 @Repository
 public interface AlignmentJobRepository extends JpaRepository<AlignmentJob, Long> {
+
+  public Optional<AlignmentJob> findById(UUID jobId);
 
   public List<AlignmentJob> findByTool(String tool);
 

@@ -37,6 +37,7 @@ public class TenantTest {
     assertAll("Check if tenant object is persisted correctly",
         () -> assertTrue(optionalTenant.isPresent()),
         () -> assertEquals("test", optionalTenant.get().getName()),
+        () -> assertTrue(optionalTenant.get().getId().equals(tenant.getId())),
         () -> assertEquals(0, optionalTenant.get().getAlignmentJobs().size()),
         () -> assertEquals(0, optionalTenant.get().getApiKeys().size()),
         () -> assertEquals(1, optionalTenant.get().getQuota()));
@@ -100,7 +101,36 @@ public class TenantTest {
 
   @Test
   public void entitiesEnumPersist() {
-
+    // Tenant object setup
+    Tenant currentTenant = new Tenant();
+    currentTenant.setName("test");
+    currentTenant.setQuota(1);
+    // AlignmentJob object
+    AlignmentJob alignmentJob = new AlignmentJob();
+    alignmentJob.setTenant(currentTenant);
+    alignmentJob.setJobStatus(AlignmentJob.JobStatus.getJobStatus("running"));
+    alignmentJob.setTool(AlignmentJob.Tool.getToolFromString("blast"));
+    // ApiKey setup
+    ApiKey apiKey = new ApiKey();
+    apiKey.setTenant(currentTenant);
+    apiKey.setKeyHash("okokok");
+    apiKey.setKeyStatus(ApiKey.KeyStatus.getKeyStatusFromString("active"));
+    // inverse side setup
+    currentTenant.addAlignmentJob(alignmentJob);
+    currentTenant.addApiKey(apiKey);
+    entityManager.persistAndFlush(currentTenant);
+    entityManager.persistAndFlush(alignmentJob);
+    entityManager.persistAndFlush(apiKey);
+    entityManager.clear();
+    Optional<AlignmentJob> optionalJob = alignmentJobRepository.findById(alignmentJob.getId());
+    Optional<ApiKey> optionalKey = apiKeyRepository.findById(apiKey.getId());
+    // Assertions
+    assertAll("checking enum pesistence",
+        () -> assertTrue(optionalJob.isPresent()),
+        () -> assertTrue(optionalKey.isPresent()),
+        () -> assertTrue(optionalJob.get().getJobStatus() == AlignmentJob.JobStatus.RUNNING),
+        () -> assertTrue(optionalJob.get().getTool() == AlignmentJob.Tool.BLAST),
+        () -> assertTrue(optionalKey.get().getKeyStatus() == ApiKey.KeyStatus.ACTIVE));
   }
 
 }

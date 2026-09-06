@@ -12,6 +12,8 @@ import java.util.UUID;
 @Repository
 public interface ApiKeyRepository extends JpaRepository<ApiKey, Long> {
 
+  public Optional<ApiKey> findById(UUID keyId);
+
   public Optional<ApiKey> findByKeyHash(String keyHash);
 
   public List<ApiKey> findByKeyStatus(ApiKey.KeyStatus keyStatus);
