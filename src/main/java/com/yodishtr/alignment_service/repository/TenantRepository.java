@@ -8,17 +8,21 @@ import org.springframework.stereotype.Repository;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface TenantRepository extends JpaRepository<Tenant, Long> {
 
-    public Optional<Tenant> findByName(String name);
-    public List<Tenant> findByCreatedAt(Instant createdDate);
+  public Optional<Tenant> findById(UUID tenantId);
 
-    @EntityGraph(attributePaths = {"alignmentJobs"})
-    public Optional<Tenant> findTenantById(String tenantId);
+  public Optional<Tenant> findByName(String name);
 
-    @EntityGraph(attributePaths = {"alignmentJobs"})
-    public Optional<Tenant> findTenantByName(String name);
+  public List<Tenant> findByCreatedAt(Instant createdDate);
+
+  @EntityGraph(attributePaths = { "alignmentJobs" })
+  public Optional<Tenant> findTenantById(String tenantId);
+
+  @EntityGraph(attributePaths = { "alignmentJobs" })
+  public Optional<Tenant> findTenantByName(String name);
 
 }
