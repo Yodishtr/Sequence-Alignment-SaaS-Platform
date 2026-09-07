@@ -10,8 +10,8 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.test.context.ActiveProfiles;
 import com.yodishtr.alignment_service.repository.TenantRepository;
 import com.yodishtr.alignment_service.repository.ApiKeyRepository;
-import com.yodishtr.alignment_service.dto.JobParameter;
-import com.yodishtr.alignment_service.dto.ResultSummary;
+import com.yodishtr.alignment_service.entity.JobParameter;
+import com.yodishtr.alignment_service.entity.ResultSummary;
 
 import java.util.List;
 import java.util.Optional;

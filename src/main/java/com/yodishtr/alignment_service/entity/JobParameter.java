@@ -1,4 +1,4 @@
-package com.yodishtr.alignment_service.dto;
+package com.yodishtr.alignment_service.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
