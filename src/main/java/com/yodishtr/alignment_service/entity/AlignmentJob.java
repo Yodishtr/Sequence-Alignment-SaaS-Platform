@@ -128,6 +128,10 @@ public class AlignmentJob {
   protected AlignmentJob() {
   }
 
+  public AlignmentJob(Tenant tenant) {
+    this.tenant = tenant;
+  }
+
   // Getters
   public UUID getId() {
     return id;

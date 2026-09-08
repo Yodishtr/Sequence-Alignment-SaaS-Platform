@@ -3,7 +3,7 @@ package com.yodishtr.alignment_service.entity;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-class ResultSummary {
+public class ResultSummary {
 
   // job details
   // private UUID jobI
