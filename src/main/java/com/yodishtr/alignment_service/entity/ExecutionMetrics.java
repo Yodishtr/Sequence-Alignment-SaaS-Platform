@@ -1,6 +1,6 @@
 package com.yodishtr.alignment_service.entity;
 
-public class ExecutionMetrics {
+class ExecutionMetrics {
 
   private Long executionDurationMs;
   private Long memoryConsumedBytes;

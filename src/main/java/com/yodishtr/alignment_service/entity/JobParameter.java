@@ -3,7 +3,8 @@ package com.yodishtr.alignment_service.entity;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JobParameter {
+class JobParameter {
+
   /*
    * need to have fields checked in service layer
    * because db wont do the check before saving it as json
