@@ -18,3 +18,12 @@ spring.jpa.open-in-view=false
 
 server port
 server.port=8080
+
+file.storage.type=${local OR s3}
+
+file.storage.data.local=${ROOT_DIR}
+
+aws.s3.region=can-east-1
+aws.s3.bucket-name=fasta_files
+aws.s3.access-key=${AWS_ACCESS_KEY_ID}
+aws.s3.secret-key=${AWS_SECRET_ACCESS_KEY}
