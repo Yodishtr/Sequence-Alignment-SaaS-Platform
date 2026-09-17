@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.OutputStream;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import com.yodishtr.alignment_service.config.RootDirConfig;
@@ -39,11 +38,12 @@ public class LocalStorage implements StorageUtility {
       try {
         Files.createDirectories(storagePath);
       } catch (IOException e) {
-        throw new RuntimeException("Could not initialize local storage folder");
+        throw new RuntimeException("Could not initialize local storage folder", e);
       }
     }
   }
 
+  // need to check if file exists first
   @Override
   public String saveSequence(String sequenceData, String targetDatabase, UUID jobIdentifier) {
     Path currentFastaSaveFile = Path.of(rootDir.getRootDirectory(), jobIdentifier.toString() + ".fasta");
@@ -92,11 +92,19 @@ public class LocalStorage implements StorageUtility {
 
   @Override
   public boolean deleteSequence(String inputReference) {
-    return false;
+    Path toDelete = Path.of(inputReference);
+    try {
+      boolean deleted = Files.deleteIfExists(toDelete);
+      return deleted;
+    } catch (IOException e) {
+      throw new StorageException("Unable to delete the file", e);
+    }
   }
 
   @Override
   public boolean exists(String inputReference) {
-    return false;
+    Path checkExists = Path.of(inputReference);
+    boolean check = Files.exists(checkExists) && Files.isRegularFile(checkExists);
+    return check;
   }
 }

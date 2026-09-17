@@ -132,6 +132,10 @@ public class AlignmentJob {
     this.tenant = tenant;
   }
 
+  public AlignmentJob(Tool tool) {
+    this.tool = tool;
+  }
+
   // Getters
   public UUID getId() {
     return id;
