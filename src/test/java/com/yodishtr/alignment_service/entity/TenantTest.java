@@ -166,7 +166,7 @@ public class TenantTest {
     ResultSummary resultSummary = new ResultSummary(1.0, "o", 1, 2, 3.0,
         4.0, 5, 6L, 7.0, 8.0);
     Tenant currentTenant = new Tenant();
-    currentTenant.setName("crap fucking project i hate it");
+    currentTenant.setName("tenant");
     currentTenant.setQuota(1);
     AlignmentJob job = new AlignmentJob();
     job.setJobStatus(AlignmentJob.JobStatus.RUNNING);
@@ -177,7 +177,7 @@ public class TenantTest {
     entityManager.persistAndFlush(job);
     entityManager.clear();
     Optional<AlignmentJob> optionalJob = alignmentJobRepository.findById(job.getId());
-    assertAll("jsonB piece of shit persistence again",
+    assertAll("jsonB persistence again",
         () -> assertTrue(optionalJob.isPresent()),
         () -> assertTrue(optionalJob.get().getResultSummary() != null),
         () -> assertEquals(1.0, optionalJob.get().getResultSummary().getEValueCutoff()),
