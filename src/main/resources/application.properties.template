@@ -21,7 +21,7 @@ server.port=8080
 
 file.storage.type=${local OR s3}
 
-file.storage.data.local=${ROOT_DIR}
+file.storage.data.local.root-directory=${ROOT_DIR}
 
 aws.s3.region=can-east-1
 aws.s3.bucket-name=fasta_files
