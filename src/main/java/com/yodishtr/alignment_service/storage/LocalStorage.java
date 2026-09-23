@@ -58,8 +58,10 @@ public class LocalStorage implements StorageUtility {
         BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8))) {
       buffWriter.write("targetDatabase=");
       buffWriter.write(targetDatabase);
+      // need to add newlines here
       buffWriter.write("sequence=");
       buffWriter.write(sequenceData);
+      // need to add newlines here
     } catch (IOException e) {
       log.error("Unable to write to file at path: ", currentFastaSaveFile, e);
       throw new StorageException("unable to write to file", e);
