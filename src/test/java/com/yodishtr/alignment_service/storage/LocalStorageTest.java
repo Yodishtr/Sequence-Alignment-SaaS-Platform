@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.nio.file.Path;
 
 import java.util.UUID;
+import java.io.IOException;
 import java.nio.file.Files;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,14 +43,28 @@ public class LocalStorageTest {
   public void testSaveSequenceReturnsCorrectReference() {
     String returnedReference = localStorage.saveSequence(sequenceData, targetDatabase, knownUUID);
     StringBuilder expected = new StringBuilder();
-    expected.append(myWorkspace.toAbsolutePath().toString()).append(knownUUID.toString()).append(".fasta");
+    expected.append(myWorkspace.toAbsolutePath().toString()).append("/").append(knownUUID.toString()).append(".fasta");
     assertAll("File Reference ID correctly returned",
         () -> assertTrue(Files.exists(myWorkspace.resolve(knownUUID.toString() + ".fasta"))),
         () -> assertEquals(expected.toString(), returnedReference));
   }
 
   @Test
-  public void testSequenceIsSavedCorrectly() {
+  public void testSequenceIsSavedCorrectly() throws IOException {
     String returnedReference = localStorage.saveSequence(sequenceData, targetDatabase, knownUUID);
+    String content = Files.readString(Path.of(returnedReference));
+    assertTrue(!content.isEmpty());
+  }
+
+  @Test
+  public void testWrittenCorrectly() throws IOException {
+    String returnedRef = localStorage.saveSequence(sequenceData, targetDatabase, knownUUID);
+    String content = Files.readString(Path.of(returnedRef));
+    String[] contentArray = content.split("\\n");
+    String targetDB = contentArray[0].split("=")[1];
+    String seqData = contentArray[1].split("=")[1];
+    assertAll("written correctly",
+        () -> assertEquals(targetDatabase, targetDB),
+        () -> assertEquals(sequenceData, seqData));
   }
 }
